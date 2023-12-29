@@ -1,0 +1,182 @@
+﻿    @model List<BorrowerPanel1.Models.Instruments>
+
+    @{
+        ViewData["Title"] = "Instruments List";
+    }
+
+    <style>
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Add border-radius for rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for a subtle lift effect */
+        }
+
+    .fade-in {
+        animation: fadeIn ease-in-out 1.3s;
+        -webkit-animation: fadeIn ease-in-out 1.3s;
+        -moz-animation: fadeIn ease-in-out 1.3s;
+        -o-animation: fadeIn ease-in-out 1.3s;
+        -ms-animation: fadeIn ease-in-out 1.3s;
+    }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-moz-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-o-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-ms-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    </style>
+
+<section class="slider_section fade-in">
+            <div id="carouselExampleIndicators" class="carousel slide" style="margin-top:15%" data-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var instrument in Model)
+                    {
+                        <div class="carousel-item @(instrument.InstrumentId == Model.First().InstrumentId ? "active" : "")">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="detail-box">
+                                            <h1>
+                                                @instrument.InstrumentName <br>
+                                                <span>
+                                                    Your Music, Your Way
+                                                </span>
+                                            </h1>
+                                            <p>
+                                                @instrument.Description
+                                            </p>
+                                            <div class="btn-box">
+                                            <a href="/Instruments/Index" class="btn-1"> Explore More </a>
+
+                                                <a id="rentNowLink_@instrument.InstrumentId"
+                                                   href="javascript:void(0);"
+                                                   class="btn-2"
+                                                   data-availability-status="@instrument.AvailabilityStatus"
+                                                   onclick="rentNowClicked(@instrument.InstrumentId, @instrument.RentAmount)">
+                                                    Rent Now
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <img src="@instrument.Image" class="img-fluid" alt="Instrument Image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="container indicator_container">
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                        }
+                    </ol>
+                </div>
+            </div>
+        </section>
+    <script>
+        function rentNowClicked(instrumentId, rentAmount) {
+            var availabilityStatus = document.getElementById("rentNowLink_" + instrumentId).getAttribute("data-availability-status");
+            if (availabilityStatus !== "Available") {
+                return false; // Prevent the anchor from navigating
+            }
+
+            // Handle the click event, e.g., redirect to the appropriate URL with RentAmount
+            window.location.href = "/RequestRentals/Create?instrumentId=" + instrumentId + "&rentAmount=" + rentAmount;
+        }
+    </script>
+
+
+@*<h1 class="text-center">Instruments List</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="row">
+        @foreach (var instrument in Model)
+        {
+            <div class="col-md-4 mb-4 @(instrument.AvailabilityStatus != "Available" ? "text-muted" : "")">
+                <div class="card">
+                    <img src="@instrument.Image" class="card-img-top" alt="Instrument Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@instrument.InstrumentName</h5>
+                        <p class="card-text">@instrument.Description</p>
+                        <p class="card-text"><strong>Availability Status: </strong>@instrument.AvailabilityStatus</p>
+                        <p class="card-text">
+                            <strong>Rent Amount: $</strong>
+                            <span class="text-success font-weight-bold">@instrument.RentAmount/day</span>
+                        </p>
+                        <a id="rentNowLink_@instrument.InstrumentId"
+                           href="javascript:void(0);"
+                           class="btn btn-primary"
+                           data-availability-status="@instrument.AvailabilityStatus"
+                           onclick="rentNowClicked(@instrument.InstrumentId, @instrument.RentAmount)">
+                            Rent Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function rentNowClicked(instrumentId, rentAmount) {
+        var availabilityStatus = document.getElementById("rentNowLink_" + instrumentId).getAttribute("data-availability-status");
+        if (availabilityStatus !== "Available") {
+            return false; // Prevent the anchor from navigating
+        }
+
+        // Handle the click event, e.g., redirect to the appropriate URL with RentAmount
+        window.location.href = "/RequestRentals/Create?instrumentId=" + instrumentId + "&rentAmount=" + rentAmount;
+    }
+</script>
+*@
+
+
+

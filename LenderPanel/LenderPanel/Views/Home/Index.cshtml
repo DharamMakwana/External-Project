@@ -1,0 +1,226 @@
+﻿@model List<LenderPanel.Models.Instruments>
+
+@{
+    ViewData["Title"] = "Instruments List";
+}
+
+<style>
+    .carousel-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px; /* Add border-radius for rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for a subtle lift effect */
+    }
+    /* styles.css */
+
+    /* Initially hide the intro */
+    .intro {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+
+    /* Show the intro on hover */
+    .box:hover .intro {
+        opacity: 1;
+        max-height: 1000px; /* Set a reasonable max-height for the transition effect */
+    }
+
+    /* Keep the name, post, and p tag visible */
+    .box .detail-box h5,
+    .box .detail-box h6,
+    .box .detail-box p.text-primary {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .social-links i {
+        color: white;
+        font-size: 25px;
+    }
+</style>
+
+<section class="slider_section">
+    <div id="carouselExampleIndicators" class="carousel slide" style="margin-top:15%" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var instrument in Model)
+            {
+                <div class="carousel-item @(instrument.InstrumentId == Model.First().InstrumentId ? "active" : "")">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="detail-box">
+                                    <h1>
+                                        @instrument.InstrumentName <br>
+                                        <span>
+                                            Your Music, Your Way
+                                        </span>
+                                    </h1>
+                                    <p>
+                                        @instrument.Description
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <img src="@instrument.Image" class="img-fluid" alt="Instrument Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="container indicator_container">
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                }
+            </ol>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<section class="team_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 style="color:white">
+                Meet Our Team
+            </h2>
+            <p style="color:white">
+                Get to know the passionate individuals who drive our musical journey forward.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/m_B612_20231110_222407_171.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Dharam Makwana
+                        </h5>
+                        <h6 class="">
+                            CEO
+                        </h6>
+                        <p class="text-primary">Leadership, Visionary</p>
+                        <div class="intro">
+                            <p>
+                                Dharam Makwana is a visionary leader who brings unparalleled expertise to our team. With a strong background in leadership, he guides us towards success.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </center>
+            </div>
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/404927732_670679775248040_7162134688415971038_n.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Naveen Gadadasu
+                        </h5>
+                        <h6 class="">
+                            CTO
+                        </h6>
+                        <p class="text-primary">Innovation, Technology</p>
+                        <div class="intro">
+                            <p>
+                                Naveen Gadadasu, our Chief Technology Officer, is at the forefront of innovation and technology. His expertise drives our technical excellence.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </center>
+            </div>
+
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/t3.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            John Doe
+                        </h5>
+                        <h6 class="">
+                            DIRECTOR
+                        </h6>
+                        <p class="text-primary">Management, Strategy</p>
+                        <div class="intro">
+                            <p>
+                                John Doe, our Director, brings strategic vision and management expertise to our team. His leadership guides us towards success.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </center>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function rentNowClicked(instrumentId, rentAmount) {
+        var availabilityStatus = document.getElementById("rentNowLink_" + instrumentId).getAttribute("data-availability-status");
+        if (availabilityStatus !== "Available") {
+            return false; // Prevent the anchor from navigating
+        }
+
+        // Handle the click event, e.g., redirect to the appropriate URL with RentAmount
+        window.location.href = "/RequestRentals/Create?instrumentId=" + instrumentId + "&rentAmount=" + rentAmount;
+    }
+</script>

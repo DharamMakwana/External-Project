@@ -1,0 +1,201 @@
+﻿@model BorrowerPanel1.Models.RequestRental
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .mine{
+        color:white;
+    }
+</style>
+<div>
+    <a asp-action="Index" class="back"><i class="bi bi-arrow-left"></i> </a>
+</div>
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box ">
+            <center> <h1 class="big-and-bold">Make request for rental</h1></center>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4 mine">
+        <form asp-action="Create" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="BorrowerId" class="control-label"></label>
+                <input asp-for="BorrowerId" class="form-control" value="@ViewData["BorrowerId"]" readonly />
+                <span asp-validation-for="BorrowerId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="InstrumentId" class="control-label"></label>
+                <input asp-for="InstrumentId" class="form-control" value="@ViewData["InstrumentId"]" readonly />
+            </div>
+            <input asp-for="RequestDate" type="hidden" value="@DateTime.Now" />
+
+            <input asp-for="TotalAmount" id="calculatedTotalAmount" name="calculatedTotalAmount" type="hidden" value="@ViewData["RentAmount"]" readonly />
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" id="StartDate" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group" >
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" id="EndDate" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Experience" class="control-label"></label>
+                <select asp-for="Experience" class="form-control">
+                    <option>2 - 3 Years</option>
+                    <option>3 - 4 Years</option>
+                    <option>More than 4 years</option>
+
+                </select>
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" value="Pending" type="hidden"/>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" id="TotalAmount" class="form-control" readonly />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <section class="slider_section">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Welcome to Our Rental Platform <br>
+                                            <span>
+                                                Explore and Rent Instruments
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Find a wide variety of instruments for your needs. Lorem ipsum dolor sit amet,
+                                 
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="/BorrowerTbs/AboutUs" class="btn-1"> Learn More </a>
+                                            <a href="/Instruments/Index" class="btn-2">Browse More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Quality Instruments for Rent <br>
+                                            <span>
+                                                Affordable and Convenient
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Our platform offers high-quality instruments for rent at affordable prices.
+                          
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="#" class="btn-1"> See Pricing </a>
+                                            <a href="#" class="btn-2">Rent Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Your Trusted Instrument Rental Source <br>
+                                            <span>
+                                                Reliable and Customer-Focused
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Choose us for a reliable and customer-focused instrument rental experience.
+                                   
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="#" class="btn-1"> Contact Us </a>
+                                            <a href="#" class="btn-2">Get Started</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        // Calculate and set TotalAmount based on StartDate and EndDate
+        document.addEventListener("DOMContentLoaded", function () {
+            var startDate = document.getElementById("StartDate");
+            var endDate = document.getElementById("EndDate");
+            var calculatedTotalAmount = document.getElementById("calculatedTotalAmount");
+            var totalAmount = document.getElementById("TotalAmount");
+
+            startDate.addEventListener("change", updateTotalAmount);
+            endDate.addEventListener("change", updateTotalAmount);
+
+            function updateTotalAmount() {
+                var start = new Date(startDate.value);
+                var end = new Date(endDate.value);
+
+                if (!isNaN(start) && !isNaN(end) && start <= end) {
+                    // Calculate the difference in days
+                    var days = Math.floor((end - start) / (24 * 60 * 60 * 1000));
+
+                    // Get the RentAmount from the query string
+                    var rentAmount = parseInt('@Context.Request.Query["rentAmount"]', 10);
+
+                    // Calculate the TotalAmount
+                    var total = days * rentAmount;
+
+                    // Set the calculated TotalAmount to the hidden input field
+                    calculatedTotalAmount.value = total;
+
+                    // Set the TotalAmount value for display
+                    totalAmount.value = total;
+                } else {
+                    // If invalid dates, set TotalAmount to empty
+                    calculatedTotalAmount.value = '';
+                    totalAmount.value = '';
+                }
+            }
+        });
+    </script>
+}
+
+

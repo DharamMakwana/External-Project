@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BorrowerPanel1.Models.Transactions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    /* Add custom styles for card and container */
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for transparency */
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .content-container {
+        margin-top: 20px;
+    }
+</style>
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box ">
+            <center> <h1 class="big-and-bold">Transaction History</h1></center>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+
+                    <p><strong>TransactionDate:</strong> @item.TransactionDate</p>
+                    <p><strong>Amount:</strong> @item.Amount</p>
+                    <p><strong>BorrowerId:</strong> @item.Borrower.BorrowerId</p>
+                   
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .card-link:hover {
+        text-decoration: none;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card {
+        margin-bottom: 20px;
+        border: none;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 2rem;
+        font-weight: bolder;
+    }
+
+    .bg-primary:hover {
+        background-color: #3366cc; /* Adjust the color as needed */
+    }
+
+    .bg-success:hover {
+        background-color: #28a745; /* Adjust the color as needed */
+    }
+
+    .bg-danger:hover {
+        background-color: #dc3545; /* Adjust the color as needed */
+    }
+
+    .bg-info:hover {
+        background-color: #17a2b8; /* Adjust the color as needed */
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="@Url.Action("Index", "LenderTbs")" class="card-link">
+                <div class="card text-center bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Lender</h5>
+                        <p class="card-text"> @ViewBag.TotalLenderCount</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="@Url.Action("Index", "BorrowerTbs")" class="card-link">
+                <div class="card text-center bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Borrower</h5>
+                        <p class="card-text"> @ViewBag.TotalBorrowerCount</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="@Url.Action("Index", "Instruments")" class="card-link">
+                <div class="card text-center bg-danger text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Instruments</h5>
+                        <p class="card-text"> @ViewBag.TotalInstrumentCount</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="@Url.Action("Index", "RequestRentals")" class="card-link">
+                <div class="card text-center bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Rental Requests</h5>
+                        <p class="card-text">  @ViewBag.TotalRequestCount</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+    </div>
+</div>

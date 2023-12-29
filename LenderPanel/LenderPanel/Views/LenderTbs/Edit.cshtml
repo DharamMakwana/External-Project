@@ -1,0 +1,116 @@
+﻿@model LenderPanel.Models.LenderTb
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .big-and-bold {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Style for the form */
+    .edit-form {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        color: white;
+    }
+
+        .edit-form:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+        }
+
+    .back {
+        font-size: 30px;
+        color: white;
+    }
+
+    /* Style to arrange fields side by side */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .back {
+        font-size: 30px;
+        color: white;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="slider_section">
+        <div class="row">
+            <div class="detail-box">
+                <center><h1 class="big-and-bold">Manage Your Profile</h1></center>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" class="back"><i class="bi bi-arrow-left"></i> </a>
+    </div>
+    <div class="edit-form">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LenderId" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="EmailId" class="control-label"></label>
+                        <input asp-for="EmailId" class="form-control" />
+                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ContactNumber" class="control-label"></label>
+                        <input asp-for="ContactNumber" class="form-control" />
+                        <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <a asp-action="ChangePassword" asp-route-id="@Model.LenderId" class="text-primary">Change Password?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

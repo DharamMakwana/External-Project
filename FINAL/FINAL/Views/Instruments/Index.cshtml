@@ -1,0 +1,107 @@
+﻿@model IEnumerable<FINAL.Models.Instruments>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    /* Add custom styles for card and text */
+    .card {
+        background-color: #001f3f;
+        color: white;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card-title, .card-text {
+        color: white;
+    }
+
+        .card-text strong {
+            font-weight: bold;
+        }
+
+    .btn-secondary {
+        background-color: #001f3f;
+        color: white;
+    }
+
+    /* Adjust card transform on hover */
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    /* Add modal styles */
+    .modal-content {
+        background-color: #001f3f;
+        color: white;
+    }
+
+    .modal-header, .modal-footer {
+        border-color: #00263e;
+    }
+
+    .btn-danger, .btn-danger:hover {
+        background-color: #ff4136;
+        color: white;
+    }
+</style>
+
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box">
+            <center><h1 class="big-and-bold">Manage instrument</h1></center>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card" data-toggle="modal" data-target="#instrumentModal_@item.InstrumentId">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <img src="@item.Image" class="card-img-top img-fluid embed-responsive-item" alt="Instrument Image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.InstrumentName</h5>
+                    <p class="card-text"><strong>Availability Status:</strong> @item.AvailabilityStatus</p>
+                    <p class="card-text"><strong>Lender Name:</strong> @item.Lender.FirstName &nbsp;@item.Lender.LastName</p>
+                </div>
+                <div class="card-footer text-center">
+                    <!-- Details link to open the modal -->
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#instrumentModal_@item.InstrumentId">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.InstrumentId" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for each instrument -->
+        <div class="modal fade" id="instrumentModal_@item.InstrumentId" tabindex="-1" role="dialog"
+             aria-labelledby="instrumentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="instrumentModalLabel">@item.InstrumentName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="@item.Image" alt="@item.InstrumentName" class="img-fluid">
+                        <p>@item.Description</p>
+                        <p><strong>Availability Status:</strong> @item.AvailabilityStatus</p>
+                        <p><strong>Lender Name:</strong> @item.Lender.FirstName &nbsp;@item.Lender.LastName</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a asp-action="Delete" asp-route-id="@item.InstrumentId" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+</div>

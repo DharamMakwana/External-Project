@@ -1,0 +1,295 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    /* styles.css */
+
+    /* Initially hide the intro */
+    .intro {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+
+    /* Show the intro on hover */
+    .box:hover .intro {
+        opacity: 1;
+        max-height: 1000px; /* Set a reasonable max-height for the transition effect */
+    }
+
+    /* Keep the name, post, and p tag visible */
+    .box .detail-box h5,
+    .box .detail-box h6,
+    .box .detail-box p.text-primary {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .social-links i
+    {
+        color:white;
+        font-size:25px;
+        
+    }
+
+    .fade-in {
+        animation: fadeIn ease-in-out 1.3s;
+        -webkit-animation: fadeIn ease-in-out 1.3s;
+        -moz-animation: fadeIn ease-in-out 1.3s;
+        -o-animation: fadeIn ease-in-out 1.3s;
+        -ms-animation: fadeIn ease-in-out 1.3s;
+    }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-moz-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-o-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-ms-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Hide the name, post, and p tag on hover */
+    
+
+
+</style>
+<section class="team_section layout_padding fade-in">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 style="color:white">
+                Meet Our Team
+            </h2>
+            <p style="color:white">
+                Get to know the passionate individuals who drive our musical journey forward.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/m_B612_20231110_222407_171.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Dharam Makwana
+                        </h5>
+                        <h6 class="">
+                            CEO
+                        </h6>
+                        <p class="text-primary">Leadership, Visionary</p>
+                        <div class="intro">
+                            <p>
+                                Dharam Makwana is a visionary leader who brings unparalleled expertise to our team. With a strong background in leadership, he guides us towards success.
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                <div class="social-links">
+                    <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" target="_blank" title="Twitter">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="#" target="_blank" title="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+                </center>
+            </div>
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/404927732_670679775248040_7162134688415971038_n.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Naveen Gadadasu
+                        </h5>
+                        <h6 class="">
+                            CTO
+                        </h6>
+                        <p class="text-primary">Innovation, Technology</p>
+                        <div class="intro">
+                            <p>
+                                Naveen Gadadasu, our Chief Technology Officer, is at the forefront of innovation and technology. His expertise drives our technical excellence.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </center>
+            </div>
+
+            <div class="col-md-4 col-sm-6 mx-auto ">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/css/t3.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            John Doe
+                        </h5>
+                        <h6 class="">
+                            DIRECTOR
+                        </h6>
+                        <p class="text-primary">Management, Strategy</p>
+                        <div class="intro">
+                            <p>
+                                John Doe, our Director, brings strategic vision and management expertise to our team. His leadership guides us towards success.
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+                <center>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/naveen.0101/?igsh=emptZHZ5YXlmdmZ0" target="_blank" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </center>
+            </div>
+       
+        </div>
+    </div>
+</section>
+
+<section class=" slider_section ">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="detail-box align-content-center">
+                                <h1>
+                                    
+                                    <span>
+                                        <i class="bi bi-geo-fill"></i>  Germany
+                                    </span>
+                                </h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                                </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="detail-box align-content-center">
+                                <h1>
+                                    
+                                    <span>
+                                        <i class="bi bi-geo-fill"></i>  Australia
+                                    </span>
+                                </h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                                </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="detail-box align-content-center">
+                                <h1>
+                                   
+                                    <span>
+                                        <i class="bi bi-geo-fill"></i>  Our Responsibility
+                                    </span>
+                                </h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                                </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>

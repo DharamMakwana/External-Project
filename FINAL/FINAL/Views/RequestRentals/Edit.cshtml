@@ -1,0 +1,83 @@
+﻿@model FINAL.Models.RequestRental
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mt-4 text-center">Edit Request</h1>
+
+<div class="card mx-auto mt-4" style="max-width: 600px;">
+    <div class="card-body">
+
+        <form asp-action="Edit" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReqId" />
+
+            <div class="mb-3">
+                <label for="BorrowerId" class="form-label">Borrower ID</label>
+                <input asp-for="BorrowerId" class="form-control" readonly />
+                <span asp-validation-for="BorrowerId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="InstrumentId" class="form-label">Instrument ID</label>
+                <input asp-for="InstrumentId" class="form-control" readonly />
+                <span asp-validation-for="InstrumentId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="RequestDate" class="form-label">Request Date</label>
+                <input asp-for="RequestDate" class="form-control" readonly />
+                <span asp-validation-for="RequestDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">Start Date</label>
+                <input asp-for="StartDate" class="form-control" readonly />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">End Date</label>
+                <input asp-for="EndDate" class="form-control" readonly />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Experience" class="form-label">Experience</label>
+                <input asp-for="Experience" class="form-control" readonly />
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Status" class="form-label">Status</label>
+                <select asp-for="Status" class="form-select">
+                    <option value="Success">Success</option>
+                    <option value="Pending">Pending</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="TotalAmount" class="form-label">Total Amount</label>
+                <input asp-for="TotalAmount" class="form-control" readonly />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

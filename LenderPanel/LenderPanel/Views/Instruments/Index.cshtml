@@ -1,0 +1,114 @@
+﻿@model IEnumerable<LenderPanel.Models.Instruments>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .icon-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .btn-icon {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0%; /* Make the container round */
+        padding: 2px; /* Add some padding for better appearance */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    }
+</style>
+<section class="team_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center" style="color:white">
+            <div class="lender-info">
+                <h3>Lend Your Instruments</h3>
+                <p>
+                    Are you a musician with instruments to share? Join our community and offer your instruments for rent. Help others embark on their musical adventures!
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var instrument in Model)
+            {
+                <div class="col-md-4 col-sm-6 mx-auto">
+                    <div class="card mb-4 position-relative">
+                        <img src="@instrument.Image" alt="@instrument.InstrumentName" class="card-img-top">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title">@instrument.InstrumentName</h5>
+                                <div class="icon-container">
+                                    <a asp-action="Edit" asp-route-id="@instrument.InstrumentId" class="btn-icon btn-edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@instrument.InstrumentId" class="btn-icon btn-delete btn-outline-danger">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="card-text">Price: $@instrument.RentAmount/Day</p>
+                            @if (instrument.AvailabilityStatus == "Available")
+                            {
+                                <p class="text-success">Available</p>
+                                <a href="#" class="text-primary" data-toggle="modal" data-target="#instrumentModal_@instrument.InstrumentId">
+                                    Details
+                                </a>
+                            }
+                            else
+                            {
+                                <p class="text-danger">Not Available</p>
+                                <a href="#" class="text-primary" data-toggle="modal" data-target="#instrumentModal_@instrument.InstrumentId">
+                                    Details
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal for each instrument -->
+                <div class="modal fade" id="instrumentModal_@instrument.InstrumentId" tabindex="-1" role="dialog"
+                     aria-labelledby="instrumentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="instrumentModalLabel">@instrument.InstrumentName</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@instrument.Image" alt="@instrument.InstrumentName" class="img-fluid">
+                                <p>@instrument.Description</p>
+                                <h5>Price: $@instrument.RentAmount/Day</h5>
+                                <!-- Add more details as needed -->
+                                @if (instrument.AvailabilityStatus == "Available")
+                                {
+                                    <p class="text-success">Available</p>
+                                  
+                                }
+                                else
+                                {
+                                    <p class="text-danger">Not Available</p>
+                                   
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    function rentNowClicked(instrumentId, rentAmount) {
+        var availabilityStatus = document.getElementById("rentNowLink_" + instrumentId).getAttribute("data-availability-status");
+        if (availabilityStatus !== "Available") {
+            return false; // Prevent the anchor from navigating
+        }
+
+        // Handle the click event, e.g., redirect to the appropriate URL with RentAmount
+        window.location.href = "/RequestRentals/Create?instrumentId=" + instrumentId + "&rentAmount=" + rentAmount;
+    }
+</script>

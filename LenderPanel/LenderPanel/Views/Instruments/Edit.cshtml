@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model LenderPanel.Models.Instruments
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    /* Add a transparent background */
+    .edit-container {
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for transparency */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    /* Style for the form */
+    .edit-form {
+        background-color: rgba(255, 255, 255, 0.2); /* Transparent background */
+        padding: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        color: white;
+    }
+
+    .edit-form:hover {
+        background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background on hover */
+        color: black;
+
+    }
+
+        .edit-form h1:hover {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background on hover */
+            color: black;
+        }
+        
+    .back {
+        font-size: 30px;
+        color: white;
+    }
+</style>
+<div>
+    <a asp-action="Index" class="back"><i class="bi bi-arrow-left"></i> </a>
+</div>
+    <div class="card edit-form">
+    <div class="slider_section">
+        <div class="row">
+            <div class="detail-box">
+                <center><h1 class="big-and-bold">Update Your Instruments Details </h1></center>
+            </div>
+        </div>
+    </div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InstrumentId" />
+            <div class="form-group">
+                <label asp-for="InstrumentName" class="control-label"></label>
+                <input asp-for="InstrumentName" class="form-control" />
+                <span asp-validation-for="InstrumentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LenderId" class="control-label"></label>
+                <input asp-for="LenderId" class="form-control" value="@Context.Session.GetInt32("LenderId")" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailabilityStatus" class="control-label"></label>
+                <input asp-for="AvailabilityStatus" class="form-control" />
+                <span asp-validation-for="AvailabilityStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RentAmount" class="control-label"></label>
+                <input asp-for="RentAmount" class="form-control" />
+                <span asp-validation-for="RentAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <textarea asp-for="Image" class="form-control"></textarea>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

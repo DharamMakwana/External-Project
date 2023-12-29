@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model LenderPanel.Models.Instruments
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+
+    .back {
+        font-size: 30px;
+        color: white;
+    }
+</style>
+<div>
+    <a asp-action="Index" asp-controller="Home" class="back"><i class="bi bi-arrow-left"></i> </a>
+</div>
+<div class="container">
+    <div class="slider_section">
+        <div class="row">
+            <div class="detail-box">
+                <center><h1 class="big-and-bold">Upload Your Instrument</h1></center>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="InstrumentName" class="control-label"></label>
+                    <input asp-for="InstrumentName" class="form-control" />
+                    <span asp-validation-for="InstrumentName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" hidden>
+                    <label asp-for="LenderId" class="control-label"></label>
+                    <input asp-for="LenderId" class="form-control" value="@Context.Session.GetInt32("LenderId")" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AvailabilityStatus" class="control-label"></label>
+                    <select asp-for="AvailabilityStatus" class="form-control">
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                    </select>
+                    <span asp-validation-for="AvailabilityStatus" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="RentAmount" class="control-label"></label>
+                    <input asp-for="RentAmount" class="form-control" />
+                    <span asp-validation-for="RentAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label"></label>
+                    <textarea asp-for="Image" class="form-control"></textarea>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

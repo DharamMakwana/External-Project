@@ -1,0 +1,28 @@
+﻿@model FINAL.Models.Instruments
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Instrument Details</h1>
+    <hr />
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="@Model.Image" class="card-img-top" alt="Instrument Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.InstrumentName</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text"><strong>Availability Status:</strong> @Model.AvailabilityStatus</p>
+                    <p class="card-text"><strong>Lender ID:</strong> @Model.Lender.LenderId</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat the above card structure three more times to create a total of four cards in a row -->
+    </div>
+</div>

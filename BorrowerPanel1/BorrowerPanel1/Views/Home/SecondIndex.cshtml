@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BorrowerPanel1.Models.Instruments>
+
+@{
+    ViewData["Title"] = "SecondIndex";
+}
+
+<section class="team_section layout_padding">
+    <div class="container">
+        
+
+        <!-- Bootstrap Card Section -->
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="background-color: rgba(255, 255, 255, 0.8); margin: 10px;">
+                        <img src="@item.Image" class="card-img-top" alt="Guard Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body" style="height: 200px; overflow: hidden; background-color: rgba(255, 255, 255, 0.8);">
+                            <h5 class="card-title">
+                                <strong>@item.InstrumentName</strong>
+                                @if (item.AvailabilityStatus == "Available")
+                                {
+                                    <a id="rentNowLink_@item.InstrumentId"
+                                       href="javascript:void(0);"
+                                       class="btn-2 btn-sm float-right p-0"
+                                       data-availability-status="@item.AvailabilityStatus"
+                                       onclick="rentNowClicked(@item.InstrumentId, @item.RentAmount)">
+                                        Rent Now
+                                    </a>
+                                }
+                                else
+                                {
+                                    <s style="color: gray;" class="btn-2 btn-sm float-right p-0">Rent Now</s>
+                                }
+                            </h5>
+                            <p style="font-size: 10px;" class="@(item.AvailabilityStatus == "Available" ? "text-success" : "text-danger")">
+                                @item.AvailabilityStatus
+                            </p>
+                            <p style="font-size: 10px;">@item.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- End of Bootstrap Card Section -->
+
+       
+    </div>
+</section>
+<script>
+    function rentNowClicked(instrumentId, rentAmount) {
+        var availabilityStatus = document.getElementById("rentNowLink_" + instrumentId).getAttribute("data-availability-status");
+        if (availabilityStatus !== "Available") {
+            return false; // Prevent the anchor from navigating
+        }
+
+        // Handle the click event, e.g., redirect to the appropriate URL with RentAmount
+        window.location.href = "/RequestRentals/Create?instrumentId=" + instrumentId + "&rentAmount=" + rentAmount;
+    }
+</script>

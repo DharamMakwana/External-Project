@@ -1,0 +1,176 @@
+﻿@model IEnumerable<BorrowerPanel1.Models.RequestRental>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .instrument-card {
+        background-color: rgba(255, 255, 255, 0.0); /* Transparent background */
+        padding: 18px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        color: white;
+        display:flex;
+   
+    }
+
+        .instrument-card:hover {
+            background-color: rgba(255, 255, 255, 0.9); /* Transparent background */
+            color: black;
+        }
+
+        .instrument-card.status-success {
+            border-color: #28a745; /* Set border color to green for success status */
+            color:green
+/*            background-color: transparent; /* Set background color to transparent for success status */
+*/        }
+
+        .instrument-card.status-pending {
+            border-color: #ffc107; /* Set border color to yellow for pending status */
+/*            background-color: transparent; /* Set background color to transparent for pending status */
+*/        }
+
+        .instrument-card img {
+            max-height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+    .fade-in {
+        animation: fadeIn ease-in-out 1.3s;
+        -webkit-animation: fadeIn ease-in-out 1.3s;
+        -moz-animation: fadeIn ease-in-out 1.3s;
+        -o-animation: fadeIn ease-in-out 1.3s;
+        -ms-animation: fadeIn ease-in-out 1.3s;
+    }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-moz-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-o-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @@-ms-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="fade-in">
+
+
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box ">
+            <center> <h1 class="big-and-bold">User Requests</h1></center>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <!-- Add the status-based classes to the card -->
+                <div class="card instrument-card @(item.Status == "Success" ? "status-success" : "status-pending")">
+                    <div class="card-body">
+                        <h5 class="card-title" hidden>Request ID: @Html.DisplayFor(modelItem => item.ReqId)</h5>
+                            <center>
+                        <p class="card-text">
+                            <!-- Inside the card-text div, add the following lines to display Borrower's name -->
+                            <div>
+                                <img src="@item.Instrument.Image" alt="@item.Instrument.InstrumentName" class="img-fluid mb-2" />
+                            </div><br />
+
+                     
+                            <strong>Borrower Name:</strong> @Html.DisplayFor(modelItem => item.Borrower.FirstName) @Html.DisplayFor(modelItem => item.Borrower.LastName)<br />
+                            <strong>Contact Number:</strong> @Html.DisplayFor(modelItem => item.Borrower.ContactNumber) <br />
+                            <strong>Email ID:</strong> @Html.DisplayFor(modelItem => item.Borrower.EmailId) <br />
+
+                            <strong>Request Date:</strong> @Html.DisplayFor(modelItem => item.RequestDate)<br />
+                            <strong>Start Date:</strong> @Html.DisplayFor(modelItem => item.StartDate)<br />
+                            <strong>End Date:</strong> @Html.DisplayFor(modelItem => item.EndDate)<br />
+                            <strong>Experience:</strong> @Html.DisplayFor(modelItem => item.Experience)<br />
+                            <strong>Instrument Name:</strong> @Html.DisplayFor(modelItem => item.Instrument.InstrumentName)<br />
+                            <strong>Total Amount:</strong> $@Html.DisplayFor(modelItem => item.TotalAmount)<br />
+                            <strong>Status:</strong> @Html.DisplayFor(modelItem => item.Status)<br />
+
+                        </p>
+                        @if (item.Status == "Pending")
+                        {
+                                <p class="text-warning">Your request is pending</p>
+
+                            <a href="/RequestRentals/Delete/@item.ReqId" class="btn btn-outline-danger">Cancel Request</a>
+
+                        }
+
+                        @if (item.Status == "Success")
+                        {
+                            var createUrl = Url.Action("Create", "Transactions", new
+                            {
+                                reqId = item.ReqId,
+                                borrowerId = item.BorrowerId,
+                                amount = item.TotalAmount,
+                                instrumentId = item.InstrumentId
+                            });
+                            <p class="text-success">Your request has been accepted</p>
+                            <a href="@createUrl" class="btn btn-outline-primary payment-btn" id="paymentBtn-@item.ReqId">Pay Now</a>
+                        }
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Add a card for the Home link -->
+<div class="text-center mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+</div>
+
+</div>

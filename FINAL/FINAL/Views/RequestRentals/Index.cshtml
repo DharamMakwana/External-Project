@@ -1,0 +1,82 @@
+﻿@model IEnumerable<FINAL.Models.RequestRental>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .instrument-card {
+        padding: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+        .instrument-card img {
+            max-height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+    /* Add styles for the success and warning classes */
+    .status-success {
+        background-color: green;
+        color: white;
+    }
+
+    .status-warning {
+        background-color: darkorange;
+        color: white;
+    }
+</style>
+
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box">
+            <center><h1 class="big-and-bold">Manage Request</h1></center>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <!-- Add the status-based classes to the card -->
+                <div class="card instrument-card @(item.Status == "Success" ? "alert-success" : "alert-warning")">
+                    <div class="card-body">
+                        <h5 class="card-title">Request ID: @Html.DisplayFor(modelItem => item.ReqId)</h5>
+                        <p class="card-text">
+                            <!-- Inside the card-text div, add the following lines to display Borrower's name -->
+                            <div>
+                                <img src="@item.Instrument.Image" alt="@item.Instrument.InstrumentName" class="img-fluid mb-2" />
+                            </div><br />
+                            <strong>Borrower Name:</strong> @Html.DisplayFor(modelItem => item.Borrower.FirstName) @Html.DisplayFor(modelItem => item.Borrower.LastName)<br />
+                            <strong>Contact Number:</strong> @Html.DisplayFor(modelItem => item.Borrower.ContactNumber) <br />
+                            <strong>Email ID:</strong> @Html.DisplayFor(modelItem => item.Borrower.EmailId) <br />
+
+                            <strong>Request Date:</strong> @Html.DisplayFor(modelItem => item.RequestDate)<br />
+                            <strong>Start Date:</strong> @Html.DisplayFor(modelItem => item.StartDate)<br />
+                            <strong>End Date:</strong> @Html.DisplayFor(modelItem => item.EndDate)<br />
+                            <strong>Experience:</strong> @Html.DisplayFor(modelItem => item.Experience)<br />
+                            <strong>Instrument Name:</strong> @Html.DisplayFor(modelItem => item.Instrument.InstrumentName)<br />
+                            <strong>Total Amount:</strong> $@Html.DisplayFor(modelItem => item.TotalAmount)
+                            <strong>Status:</strong> @Html.DisplayFor(modelItem => item.Status)<br />
+
+                        </p>
+                        <div class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.ReqId" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.ReqId" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Add a card for the Home link -->
+<div class="text-center mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+</div>

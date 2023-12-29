@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FINAL.Models.BorrowerTb>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="slider_section">
+    <div class="row">
+        <div class="detail-box">
+            <center><h1 class="big-and-bold">Manage Borrowers</h1></center>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</h5>
+                        <p class="card-text">
+                            <strong>Email:</strong> @Html.DisplayFor(modelItem => item.EmailId)<br />
+                            <strong>Contact:</strong> @Html.DisplayFor(modelItem => item.ContactNumber)<br />
+                            <strong>Address:</strong> @Html.DisplayFor(modelItem => item.Address)
+                        </p>
+                        <div class="text-center">
+                            <a asp-action="Delete" asp-route-id="@item.BorrowerId" class="btn btn-danger">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Add a card for the Home link -->
+<div class="text-center mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+</div>
